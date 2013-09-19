@@ -1,0 +1,35 @@
+{
+  "name": "spawn-module",
+  "version": "0.1.0",
+  "description": "Spawn a node module that exports callback-based functions as a process.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "duplexer": "~0.1.1",
+    "through": "~2.3.4",
+    "dnode": "~1.0.5"
+  },
+  "devDependencies": {
+    "tap": "~0.4.4"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spion/node-spawn-module.git"
+  },
+  "keywords": [
+    "spawn",
+    "module",
+    "callback",
+    "process",
+    "dnode"
+  ],
+  "author": "spion",
+  "license": "MIT",
+  "gitHead": "f9699ba46db3de4f07956337b7f196b43fd37b24",
+  "readmeFilename": "README.md"
+}

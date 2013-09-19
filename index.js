@@ -1,25 +1,23 @@
-var cp = require('child-process');
+var cp = require('child_process');
 var streamify = require('./streamify');
 var dnode = require('dnode');
 var duplexer = require('duplexer');
 var through = require('through');
+var path = require('path');
 
-module.exports = function(requireFn, path, cb) {
+module.exports = function(requireFn, code, cb) {
     if (!cb) {
-        cb = path
-        path = requireFn;
+        cb = code
+        code = requireFn;
         requireFn = null;
     }
     if (requireFn && requireFn.resolve)
-        path = requireFn.resolve(path);
+        code = requireFn.resolve(code);
 
     
-    var child = cp.fork('./worker.js');
-    if (typeof(path) == 'function') 
-        child.send({cmd: 'load', fn: path.toString()});
-    else 
-        child.send({cmd: 'load', path: path});
-    
+    var child = cp.fork(path.join(__dirname, 'worker'));
+
+    child.send({cmd: 'load', path: code});
 
     var d = dnode();
     var s = streamify(child);
@@ -27,6 +25,12 @@ module.exports = function(requireFn, path, cb) {
     s.pipe(d).pipe(s);
 
     d.on('remote', function(remote) {
+        remote.__child_process__ = child;
         cb(null, remote);
     });
 }
+
+module.exports.kill = function(remote) {
+    remote.__child_process__.kill();
+    remote.__child_process__ = null;
+};
