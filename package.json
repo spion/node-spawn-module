@@ -1,6 +1,6 @@
 {
   "name": "spawn-module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Spawn a node module that exports callback-based functions as a process.",
   "main": "index.js",
   "directories": {
