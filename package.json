@@ -7,9 +7,9 @@
     "test": "test"
   },
   "dependencies": {
+    "dnode": "^1.2.0",
     "duplexer": "~0.1.1",
-    "through": "~2.3.4",
-    "dnode": "~1.0.5"
+    "through": "~2.3.4"
   },
   "devDependencies": {
     "tap": "~0.4.4"
